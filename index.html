@@ -1,84 +1,69 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>WhatsApp Panggil</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Masukkan Nomor WhatsApp</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: sans-serif;
-      background-color: #f0f0f0;
-    }
-    .container {
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 15vh; /* agak ke atas dari tengah */
+      padding: 40px;
+    }
+    h2 {
+      color: #25d366;
     }
     input {
-      font-size: 18px;
-      padding: 12px;
-      width: 80%;
-      max-width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+      margin-bottom: 20px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 6px;
     }
-    .wa-button {
-      margin-top: 20px;
+    #waBtn {
       display: none;
-    }
-    .wa-button a {
-      background-color: #25D366;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 18px;
-      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      gap: 8px;
+      padding: 10px 20px;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
     }
-    .wa-button a img {
-      width: 24px;
-      height: 24px;
+    #waBtn img {
+      width: 20px;
+      height: 20px;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <input type="text" id="nomor" placeholder="Contoh: 0856xxxxxxx" oninput="updateLink()">
-
-    <div class="wa-button" id="hasil">
-      <a id="waLink" href="#" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
-        Panggil
-      </a>
-    </div>
-  </div>
+  <h2>Masukkan Nomor WhatsApp</h2>
+  <input type="text" id="phoneInput" placeholder="Masukkan nomor (08xxxxxxxxx)" />
+  <a id="waBtn" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WA Icon"/>
+    Panggil
+  </a>
 
   <script>
-    function updateLink() {
-      const input = document.getElementById("nomor").value.trim();
-      const hasilDiv = document.getElementById("hasil");
-      const link = document.getElementById("waLink");
+    const input = document.getElementById("phoneInput");
+    const waBtn = document.getElementById("waBtn");
 
-      let nomor = input.replace(/\D/g, '');
-
-      if (nomor.length >= 9) {
-        if (nomor.startsWith("0")) {
-          nomor = "62" + nomor.slice(1);
-        }
-        link.href = "https://wa.me/" + nomor;
-        hasilDiv.style.display = "block";
+    input.addEventListener("input", () => {
+      const raw = input.value.replace(/\D/g, ""); // Hanya angka
+      if (raw.startsWith("08") && raw.length >= 9) {
+        const waNumber = "62" + raw.slice(1);
+        waBtn.href = `https://wa.me/${waNumber}`;
+        waBtn.style.display = "inline-flex";
       } else {
-        hasilDiv.style.display = "none";
+        waBtn.style.display = "none";
       }
-    }
+    });
   </script>
-
 </body>
 </html>
