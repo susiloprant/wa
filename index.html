@@ -26,23 +26,48 @@
       border: 1px solid #ccc;
     }
 
-    button {
+    .button-group {
       margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-wa, .btn-wa-business {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       padding: 0.6rem 1.2rem;
       font-size: 1rem;
       border: none;
       border-radius: 8px;
-      background-color: #25D366;
       color: white;
       cursor: pointer;
     }
 
-    button:hover {
+    .btn-wa {
+      background-color: #25D366;
+    }
+
+    .btn-wa:hover {
       background-color: #1ebc57;
+    }
+
+    .btn-wa-business {
+      background-color: #128C7E;
+    }
+
+    .btn-wa-business:hover {
+      background-color: #0b6b5c;
     }
 
     .output {
       margin-top: 1rem;
+    }
+
+    .btn-wa img,
+    .btn-wa-business img {
+      width: 20px;
+      height: 20px;
     }
   </style>
 </head>
@@ -69,10 +94,23 @@
         }
 
         const link = `https://wa.me/${nomor}`;
+        const businessLink = `https://api.whatsapp.com/send?phone=${nomor}`;
 
-        output.innerHTML = `<a href="${link}" target="_blank">
-          <button>Panggil WhatsApp</button>
-        </a>`;
+        output.innerHTML = `
+          <div class="button-group">
+            <a href="${link}" target="_blank">
+              <button class="btn-wa">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/whatsapp.svg" alt="WA">
+                WhatsApp
+              </button>
+            </a>
+            <a href="${businessLink}" target="_blank">
+              <button class="btn-wa-business">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/whatsapp.svg" alt="WA Business">
+                WhatsApp Business
+              </button>
+            </a>
+          </div>`;
       } else {
         output.innerHTML = "";
       }
